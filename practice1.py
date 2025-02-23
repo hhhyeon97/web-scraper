@@ -1,4 +1,6 @@
 
+# Variables and Functions
+
 # [0. 기본 출력]
 
 print("Hello world!")
