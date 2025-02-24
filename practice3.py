@@ -129,7 +129,7 @@ print(user["address"][0]) # 서울시"""
 # [18. For Loops]
 
 # (튜플이나 리스트 만들 때 이름을 복수형으로 사용하는 관습이 있다.)
-websites = (
+"""websites = (
     "google.com",
     "airbnb.com",
     "twitter.com",
@@ -149,6 +149,100 @@ for site in websites:
 
 for site in websites:
     print("site is equals to", site)
-
+"""
 
 # [19. URL Formatting]
+
+# 연습 
+
+"""websites = (
+    "https://google.com",
+    "airbnb.com",
+    "twitter.com",
+    "facebook.com",
+    "instagram.com"
+)
+"""
+# website가 https://로 시작하는지 여부에 따라 다르게 출력하기
+"""for website in websites:
+    if website.startswith("https://"):
+        print("good to go")
+    else:
+        print("we have to fix it")"""
+
+# website가 https://로 시작하지 않을 때 출력하기
+# if not 사용
+
+"""for website in websites:
+    if not website.startswith("https://"):
+        print("have to fix")"""
+
+# website가 https://로 시작하지 않을 때 https:// 붙이기
+"""for website in websites:
+    if not website.startswith("https://"):
+        website = f"https://{website}"
+    print(website) # if문 밖에 있는 것이므로 전체 반복 횟수만큼 출력됨
+"""
+
+# [20. Requests]
+
+# 기본 라이브러리 외에 다른 기능 필요할 때 참고
+# https://pypi.org/
+
+# requests 모듈
+# https://pypi.org/project/requests/
+# 파이썬 코드에서 웹사이트로 요청을 보낼 수 있다.
+# 설치 방법 
+# 터미널에서 명령어 입력 pip install requests
+
+# [21. Status Codes]
+
+from requests import get
+
+websites = (
+    "https://google.com",
+    "airbnb.com",
+    "facebook.com",
+    "instagram.com"
+)
+
+# get 함수를 사용하여 website를 반환 받으려고 할 때
+# 어떤 결과가 나올지 확인한다.
+
+"""for website in websites:
+    if not website.startswith("https://"):
+        website = f"https://{website}"
+    response = get(website)
+    print(response)"""
+
+# 출력해보면 이렇게 뜬다 -> <Response [200]>
+# 웹사이트가 성공적으로 응답했을 때
+# 반환 받을 수 있는 코드 : 200
+# HTTP 상태 코드 참고 
+# https://developer.mozilla.org/ko/docs/Web/HTTP/Status
+
+# 코드 값만 알고 싶을 때 
+# response 데이터와 연결할 수 있는 status_code 메서드를 사용하면 된다.
+"""for website in websites:
+    if not website.startswith("https://"):
+        website = f"https://{website}"
+    response = get(website)
+    print(response.status_code) # 200"""
+
+# =============================================
+# 연습
+# 결과 값을 딕셔너리 자료구조에 담아 보기
+results = {}
+
+for website in websites:
+    if not website.startswith("https://"):
+        website = f"https://{website}"
+    response = get(website)
+    if response.status_code == 200:
+        # print(f"{website} is OK.")
+        results[website] = "OK"
+    else:
+        # print(f"{website} not OK.")
+        results[website] = "FAILED"
+
+print(results)
